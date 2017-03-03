@@ -124,32 +124,49 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void reset() {
-        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                cells[i][j] = 0;
+            }
+        }
+        for (ImageView imageView : iv) {
+            imageView.setImage(null);
+        }
     }
     
     
-    public void checkWin() {
+    protected void checkWin() {
         if(cells[0][0]==player && cells[0][1]==player && cells[0][2]==player)
-            messageBox();
+            messageBox(player);
         else if(cells[1][0]==player && cells[1][1]==player && cells[1][2]==player)
-            messageBox();
+            messageBox(player);
         else if(cells[2][0]==player && cells[2][1]==player && cells[2][2]==player)
-            messageBox();
+            messageBox(player);
         else if(cells[0][0]==player && cells[1][0]==player && cells[2][0]==player)
-            messageBox();
+            messageBox(player);
         else if(cells[0][1]==player && cells[1][1]==player && cells[2][1]==player)
-            messageBox();
+            messageBox(player);
         else if(cells[0][2]==player && cells[1][2]==player && cells[2][2]==player)
-            messageBox();
+            messageBox(player);
         else if(cells[0][0]==player && cells[1][1]==player && cells[2][2]==player)
-            messageBox();
+            messageBox(player);
         else if(cells[0][2]==player && cells[1][1]==player && cells[2][0]==player)
-            messageBox();
+            messageBox(player);
         
     }
     
-    public void messageBox() {
-        JOptionPane.showMessageDialog(null, "Winner");
+    public void messageBox(byte p) {
+        // JOptionPane.showConfirmDialog(null, "Winner Player " + p);
+        // JOptionPane.showMessageDialog(null, "Winner Player " + p);
+        Object[] options = {"OK"};
+        int n = JOptionPane.showOptionDialog(null,
+                "Winner Player " + p,"The End",
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+        reset();
     }
 
 }
